@@ -1,0 +1,68 @@
+{% extends "parent.html" %}
+{% block title %}Transfer{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/table.css">
+{% endblock %}
+{% block page_name %}Transfer{% endblock %}
+
+{% block body %}
+<div class="container">
+    <input id="url_transfer_id" type="hidden" value="{{ transfer_id }}" />
+    <div class="section editor">
+        <div>
+            <span>ID:</span>
+            <span id="transfer_id"></span>
+        </div>
+        <label for="transfer_num">Num:
+            <input id="transfer_num" type="text" />
+        </label>
+        <br />
+        <label for="transfer_post">Post:
+            <input id="transfer_post" type="text" />
+        </label>
+        <br />
+        <label for="transfer_reason">Reason:
+            <input id="transfer_reason" type="text" />
+        </label>
+        <br />
+        <label for="transfer_date">Date:
+            <input id="transfer_date" type="date" />
+        </label>
+        <br />
+
+        <button id="create">Create</button>
+        <button id="update">Update</button>
+        <button id="delete">Delete</button>
+        <button id="reset">Reset</button>
+    </div>
+    <div class="transfer">
+        <table>
+            <thead>
+                <tr>
+                    <th>Num</th>
+                    <th>Post</th>
+                    <th>Reason</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="error">
+    </div>
+</div>
+<div class="error">
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script type="module">
+    // Give the imported MVC components a namespace
+    import * as MVC from "/static/js/transfer.mjs";
+
+    // Create an intentional global variable referencing the import
+    window.mvc = MVC;
+</script>
+{% endblock %}

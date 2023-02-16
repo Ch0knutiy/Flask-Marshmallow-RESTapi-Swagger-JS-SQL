@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% block head %}
+    <title>{% block title %}{% endblock %} Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="/static/css/parent.css">
+    {% endblock %}
+</head>
+
+<body>
+    <div class="navigation">
+        <a href="/cities">Cities</a>
+        <a href="/country">Countries</a>
+        <a href="/client">Clients</a>
+        <a href="/employee">Employees</a>
+        <a href="/flights">Flights</a>
+        <a href="/hotel">Hotels</a>
+        <a href="/route">Routes</a>
+        <a href="/ticket">Tickets</a>
+        <a href="/transfer">Transfers</a>
+    </div>
+
+    <h2>
+        <div align="center">{% block page_name%}{% endblock %}</div>
+    </h2>
+
+
+    {% block body %}
+    {% endblock %}
+</body>
+
+{% block javascript %}
+{% endblock %}
+
+</html>

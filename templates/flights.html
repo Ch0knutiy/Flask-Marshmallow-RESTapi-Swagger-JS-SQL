@@ -1,0 +1,78 @@
+{% extends "parent.html" %}
+{% block title %}Flights{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/table.css">
+{% endblock %}
+{% block page_name %}Flights{% endblock %}
+
+{% block body %}
+<div class="container">
+    <input id="url_flights_num" type="hidden" value="{{ flights_num }}" />
+    <div class="section editor">
+        <label for="flights_num">Num:
+            <input id="flights_num" type="text" />
+        </label>
+        <br />
+
+        <label for="date">Date:
+            <input id="date" type="date" />
+        </label>
+        <br />
+        <label for="time">Time:
+            <input id="time" type="time" />
+        </label>
+        <br />
+
+        <label for="class">Class:
+            <input id="class" type="text" />
+        </label>
+        <br />
+        <label for="aircraft">Aircraft:
+            <input id="aircraft" type="text" />
+        </label>
+        <br />
+        <label for="free">Free:
+            <input id="free" type="text" />
+        </label>
+        <br />
+
+        <button id="create">Create</button>
+        <button id="update">Update</button>
+        <button id="delete">Delete</button>
+        <button id="reset">Reset</button>
+    </div>
+    <div class="flights">
+        <table>
+            <thead>
+                <tr>
+                    <br />
+                    <th>Num</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Class</th>
+                    <th>Aircraft</th>
+                    <th>Free</th>
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="error">
+    </div>
+</div>
+<div class="error">
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script type="module">
+    // Give the imported MVC components a namespace
+    import * as MVC from "/static/js/flights.mjs";
+
+    // Create an intentional global variable referencing the import
+    window.mvc = MVC;
+</script>
+{% endblock %}

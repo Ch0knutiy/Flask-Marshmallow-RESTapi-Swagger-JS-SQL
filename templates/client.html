@@ -1,0 +1,84 @@
+{% extends "parent.html" %}
+{% block title %}Client{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/table.css">
+{% endblock %}
+{% block page_name %}Client{% endblock %}
+
+{% block body %}
+<div class="container">
+    <input id="url_client_id" type="hidden" value="{{ client_id }}" />
+    <div class="section editor">
+        <div>
+            <span>ID:</span>
+            <span id="client_id"></span>
+        </div>
+        <label for="client_surname">Surname:
+            <input id="client_surname" type="text" />
+        </label>
+        <br />
+        <label for="client_name">Name:
+            <input id="client_name" type="text" />
+        </label>
+        <br />
+        <label for="client_patronymic">Patronymic:
+            <input id="client_patronymic" type="text" />
+        </label>
+        <br />
+        <label for="client_phone">Phone:
+            <input id="client_phone" type="text" />
+        </label>
+        <br />
+        <label for="client_date">Date:
+            <input id="client_date" type="date" />
+        </label>
+        <br />
+        <label for="client_time">Time:
+            <input id="client_time" type="time" />
+        </label>
+        <br />
+        <span>Route num:</span>
+        <span id="route_id"><select id="route_select">
+            </select></span>
+        <br />
+
+        <button id="create">Create</button>
+        <button id="update">Update</button>
+        <button id="delete">Delete</button>
+        <button id="reset">Reset</button>
+    </div>
+    <div class="client">
+        <table>
+            <thead>
+                <tr>
+                    <br />
+                    <th>Surname</th>
+                    <th>Name</th>
+                    <th>Patronymic</th>
+                    <th>Phone</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Route</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="error">
+    </div>
+</div>
+<div class="error">
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script type="module">
+    // Give the imported MVC components a namespace
+    import * as MVC from "/static/js/client.mjs";
+
+    // Create an intentional global variable referencing the import
+    window.mvc = MVC;
+</script>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "parent.html" %}
+{% block title %}Route{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/table.css">
+{% endblock %}
+{% block page_name %}Route{% endblock %}
+
+{% block body %}
+<div class="container">
+    <input id="url_route_id" type="hidden" value="{{ route_id }}" />
+    <div class="section editor">
+        <div>
+            <span>ID:</span>
+            <span id="id"></span>
+        </div>
+        <label for="name">Name:
+            <input id="name" type="text" />
+        </label>
+        <br />
+        <span>City:</span>
+        <span id="city_id"><select id="city_select">
+            </select></span>
+        <br />
+        <label for="duration">Duration:
+            <input id="duration" type="time" />
+        </label>
+        <br />
+        <span>Hotel:</span>
+        <span id="hotel_id"><select id="hotel_select">
+            </select></span>
+        <br />
+        <span>Company:</span>
+        <span id="company_id"><select id="company_select">
+            </select></span>
+        <br />
+        <span>Employee:</span>
+        <span id="employee_id"><select id="employee_select">
+            </select></span>
+        <br />
+
+        <button id="create">Create</button>
+        <button id="update">Update</button>
+        <button id="delete">Delete</button>
+        <button id="reset">Reset</button>
+    </div>
+    <div class="route">
+        <table>
+            <thead>
+                <tr>
+                    <br />
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Duration</th>
+                    <th>Hotel</th>
+                    <th>Company</th>
+                    <th>Employee</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="error">
+    </div>
+</div>
+<div class="error">
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script type="module">
+    // Give the imported MVC components a namespace
+    import * as MVC from "/static/js/route.mjs";
+
+    // Create an intentional global variable referencing the import
+    window.mvc = MVC;
+</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+/*
+ * This is the CSS stylesheet for the demo products application
+ */
+
+.editor {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    border: 2px solid darkgrey;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+button {
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 3px;
+    background-color: rgb(190, 190, 190);
+}
+
+div.products {
+    margin: 10px 30px 10px 30px;
+    border: 2px solid rgb(190, 190, 190);
+}
+
+td {
+    text-align: center;
+}
+
+th {
+    background-color: rgb(171, 171, 171);
+    ;
+}
+
+tbody td.timestamp {
+    width: 280px;
+}
+
+tbody td.name {
+    cursor: pointer;
+    height: 33px;
+}
+
+table caption {
+    background-color: rgb(190, 190, 190);
+}

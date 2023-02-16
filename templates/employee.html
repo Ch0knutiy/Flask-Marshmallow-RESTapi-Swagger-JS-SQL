@@ -1,0 +1,95 @@
+{% extends "parent.html" %}
+{% block title %}Employee{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/table.css">
+{% endblock %}
+{% block page_name %}Employee{% endblock %}
+
+{% block body %}
+<div class="container">
+    <input id="url_employee_id" type="hidden" value="{{employee_id }}" />
+    <div class="section editor">
+        <div>
+            <span>ID:</span>
+            <span id="employee_id"></span>
+        </div>
+        <label for="employee_surname">Surname
+            <input id="employee_surname" type="text" />
+        </label>
+        <br />
+
+        <label for="employee_name">Name
+            <input id="employee_name" type="text" />
+        </label>
+        <br />
+        <label for="employee_patronymic">Patronymic
+            <input id="employee_patronymic" type="text" />
+        </label>
+        <br />
+        <label for="employee_phone">Phone
+            <input id="employee_phone" type="text" />
+        </label>
+        <br />
+        <label for="employee_address">Address
+            <input id="employee_address" type="text" />
+        </label>
+        <br />
+        <label for="employee_birth">Birth
+            <input id="employee_birth" type="date" />
+        </label>
+        <br />
+        <label for="employee_post">Post
+            <input id="employee_post" type="text" />
+        </label>
+        <br />
+        <label for="employee_salary">Salary
+            <input id="employee_salary" type="text" />
+        </label>
+        <br />
+        <span>Transfer num:</span>
+        <span id="transfer_id"><select id="transfer_select">
+            </select></span>
+        <br />
+
+        <button id="create">Create</button>
+        <button id="update">Update</button>
+        <button id="delete">Delete</button>
+        <button id="reset">Reset</button>
+    </div>
+    <div class="employee">
+        <table>
+            <thead>
+                <tr>
+                    <br />
+                    <th>Surname</th>
+                    <th>Name</th>
+                    <th>Patronymic</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Birth</th>
+                    <th>Post</th>
+                    <th>Salary</th>
+                    <th>Transfer num</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="error">
+    </div>
+</div>
+<div class="error">
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script type="module">
+    // Give the imported MVC components a namespace
+    import * as MVC from "/static/js/employee.mjs";
+
+    // Create an intentional global variable referencing the import
+    window.mvc = MVC;
+</script>
+{% endblock %}

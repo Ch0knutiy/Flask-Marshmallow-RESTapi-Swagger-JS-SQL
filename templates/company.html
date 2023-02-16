@@ -1,0 +1,69 @@
+{% extends "parent.html" %}
+{% block title %}Company{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/static/css/table.css">
+{% endblock %}
+{% block page_name %}Company{% endblock %}
+
+{% block body %}
+<div class="container">
+    <input id="url_company_id" type="hidden" value="{{ company_id }}" />
+    <div class="section editor">
+        <div>
+            <span>company ID:</span>
+            <span id="company_id"></span>
+        </div>
+        <label for="name">name
+            <input id="name" type="text" />
+        </label>
+        <label for="flights_num">name
+            <input id="flights_num" type="text" />
+        </label>
+
+        <div id="first">
+            <div class="Flights">
+                <p>Flights</p>
+                <table>
+                    <thead>
+                        <th>Flights</th>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+        <button id="create">Create</button>
+        <button id="update">Update</button>
+        <button id="delete">Delete</button>
+        <button id="reset">Reset</button>
+    </div>
+    <div class="company">
+        <table>
+            <thead>
+                <tr>
+                    <br />
+                    <th>Flights</th>
+                    <th>Name</th>
+
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="error">
+    </div>
+</div>
+<div class="error">
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script type="module">
+    // Give the imported MVC components a namespace
+    import * as MVC from "/static/js/company.mjs";
+
+    // Create an intentional global variable referencing the import
+    window.mvc = MVC;
+</script>
+{% endblock %}

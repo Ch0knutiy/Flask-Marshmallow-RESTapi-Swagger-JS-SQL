@@ -1,0 +1,843 @@
+# swagger.yml
+
+openapi: 3.0.0
+info:
+  title: "RP Flask REST API"
+  description: "An API about travel agency"
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+    
+components:
+  schemas:
+
+    City:
+      type: "object"
+      required:
+        - city_id
+      properties:
+        city_id:
+          type: "integer"
+        city_name:
+          type: "string"
+        city_country:
+          type: "integer"
+
+    Country:
+      type: "object"
+      required:
+        - id
+      properties:
+        id:
+          type: "integer"
+        country:
+          type: "string"
+
+    Employee:
+      type: "object"
+      required:
+        - id
+      properties:
+        id:
+          type: "integer"
+        surname:
+          type: "string"
+        name:
+          type: "string"
+        patronomyic:
+          type: "string"
+        adress:
+          type: "string"
+        birth:
+          type: "string"
+        post:
+          type: "string"
+        salary:
+          type: "integer"
+        transfer_id:
+          type: "integer"
+        phone:
+          type: "string"
+    
+    Client:
+      type: "object"
+      required:
+        - id
+      properties:
+        id:
+          type: "integer"
+        surname:
+          type: "string"
+        name:
+          type: "string"
+        patronomyic:
+          type: "string"
+        phone:
+          type: "string"
+        date_of_buy:
+          type: "string"
+        time_of_buy:
+          type: "string"
+        route_id:
+          type: "integer"
+    
+    Company:
+      type: "object"
+      required:
+        - id
+      properties:
+        id:
+          type: "integer"
+        name:
+          type: "string"
+        flights_num:
+          type: "integer"
+    
+    Flights:
+      type: "object"
+      required:
+        - num
+      properties:
+        num:
+          type: "string"
+        date:
+          type: "string"
+        time:
+          type: "string"
+        aircraft:
+          type: "string"
+        clazz:
+          type: "string"
+        free:
+          type: "integer"
+    
+    Hotel:
+      type: "object"
+      required:
+        - id
+      properties:
+        id:
+          type: "integer"
+        name:
+          type: "string"
+        clazz:
+          type: "integer"
+        categories:
+          type: "string"
+
+    Route:
+      type: "object"
+      required:
+        - id
+      properties:
+        id:
+          type: "integer"
+        name:
+          type: "string"
+        city_id:
+          type: "integer"
+        duration:
+          type: "string"
+        hotel_id:
+          type: "integer"
+        company_id:
+          type: "integer"
+        employee_id:
+          type: "integer"  
+    
+    Ticket:
+      type: "object"
+      required:
+        - id
+      properties:
+        id:
+          type: "integer"
+        flight_num:
+          type: "string"
+        seat:
+          type: "integer"
+        id_client:
+          type: "integer"
+    
+    Transfer:
+      type: "object"
+      required:
+        - id
+      properties:
+        id:
+          type: "integer"
+        num:
+          type: "integer"
+        post:
+          type: "string"
+        reason:
+          type: "string"
+        date:
+          type: "string"
+      
+  parameters:
+    city_id:
+      name: "city_id"
+      description: "Id of the city to edit"
+      in: path
+      required: True
+      schema:
+        type: "integer"
+    id:
+      name: "id"
+      description: "Id to edit"
+      in: path
+      required: True
+      schema:
+        type: "integer"
+    num:
+      name: "num"
+      description: "num to edit"
+      in: path
+      required: True
+      schema:
+        type: "string"
+
+    
+
+paths:
+  /cities:
+    get:
+      operationId: "database.read_all_cities"
+      tags:
+        - Cities
+      summary: "Read the list of cities"
+      responses:
+        "200":
+          description: "Successfully read cities list"
+    post:
+      operationId: "database.create_city"
+      tags:
+        - Cities
+      summary: "Create a city"
+      requestBody:
+          description: "City to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "city"
+                $ref: "#/components/schemas/City"
+      responses:
+        "201":
+          description: "Successfully created city"
+    put:
+      tags:
+        - Cities
+      operationId: "database.update_city"
+      summary: "Update a city"
+      responses:
+        "200":
+          description: "Successfully updated city"
+      requestBody:
+        description: "City to update"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "city"
+              $ref: "#/components/schemas/City"
+
+  /cities/{city_id}:
+    get:
+      operationId: "database.read_one_city"
+      tags:
+        - Cities
+      summary: "Read one city"
+      parameters:
+        - $ref: "#/components/parameters/city_id"
+      responses:
+        "200":
+          description: "Successfully read city"
+    delete:
+      tags:  
+        - Cities    
+      operationId: "database.delete_city"
+      summary: "Delete a city"
+      parameters:
+        - $ref: "#/components/parameters/city_id"
+      responses:
+        "204":
+          description: "Successfully deleted city"
+
+  /country:
+    get:
+      operationId: "database.read_all_countries"
+      tags:
+        - Countries
+      summary: "Read the list of countries"
+      responses:
+        "200":
+          description: "Successfully read countries list"
+    post:
+      operationId: "database.create_country"
+      tags:
+        - Countries
+      summary: "Create a country"
+      requestBody:
+          description: "Country to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "country"
+                $ref: "#/components/schemas/Country"
+      responses:
+        "201":
+          description: "Successfully created country"
+    put:
+      tags:
+        - Countries
+      operationId: "database.update_country"
+      summary: "Update a country"
+      responses:
+        "200":
+          description: "Successfully updated country"
+      requestBody:
+        description: "Country to update"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "country"
+              $ref: "#/components/schemas/Country"
+
+  /country/{id}:
+    get:
+      operationId: "database.read_one_country"
+      tags:
+        - Countries
+      summary: "Read one country"
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "200":
+          description: "Successfully read country"
+    delete:
+      tags:  
+        - Countries    
+      operationId: "database.delete_country"
+      summary: "Delete a country"
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "204":
+          description: "Successfully deleted country"
+
+  /client:
+      get:
+        operationId: "database.read_all_clients"
+        tags:
+          - Clients
+        summary: "Read the list of clients"
+        responses:
+          "200":
+            description: "Successfully read clients list"
+      post:
+        operationId: "database.create_client"
+        tags:
+          - Clients
+        summary: "Create a client"
+        requestBody:
+            description: "Client to create"
+            required: True
+            content:
+              application/json:
+                schema:
+                  x-body-name: "client"
+                  $ref: "#/components/schemas/Client"
+        responses:
+          "201":
+            description: "Successfully created client"
+      put:
+        tags:
+          - Clients
+        operationId: "database.update_client"
+        summary: "Update a client"
+        responses:
+          "200":
+            description: "Successfully updated client"
+        requestBody:
+          description: "Client to update"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "client"
+                $ref: "#/components/schemas/Client"
+
+  /client/{id}:
+    get:
+       operationId: "database.read_one_client"
+       tags:
+         - Clients
+       summary: "Read one client"
+       parameters:
+         - $ref: "#/components/parameters/id"
+       responses:
+         "200":
+           description: "Successfully read client"
+    delete:
+      tags:  
+        - Clients    
+      operationId: "database.delete_client"
+      summary: "Delete a client"
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "204":
+          description: "Successfully deleted client"
+
+  /employee:
+      get:
+        operationId: "database.read_all_employees"
+        tags:
+          - Employees
+        summary: "Read the list of employees"
+        responses:
+          "200":
+            description: "Successfully read employees list"
+      post:
+        operationId: "database.create_employee"
+        tags:
+          - Employees
+        summary: "Create a employee"
+        requestBody:
+            description: "Employee to create"
+            required: True
+            content:
+              application/json:
+                schema:
+                  x-body-name: "employee"
+                  $ref: "#/components/schemas/Employee"
+        responses:
+          "201":
+            description: "Successfully created employee"
+      put:
+        tags:
+          - Employees
+        operationId: "database.update_employee"
+        summary: "Update a employee"
+        responses:
+          "200":
+            description: "Successfully updated employee"
+        requestBody:
+          description: "Employee to update"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "employee"
+                $ref: "#/components/schemas/Employee"
+
+  /employee/{id}:
+    get:
+       operationId: "database.read_one_employee"
+       tags:
+         - Employees
+       summary: "Read one employee"
+       parameters:
+         - $ref: "#/components/parameters/id"
+       responses:
+         "200":
+           description: "Successfully read employee"
+    delete:
+      tags:  
+        - Employees    
+      operationId: "database.delete_employee"
+      summary: "Delete a employee"
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "204":
+          description: "Successfully deleted employee"
+
+  /flights:
+      get:
+        operationId: "database.read_all_flights"
+        tags:
+          - Flights
+        summary: "Read the list of flights"
+        responses:
+          "200":
+            description: "Successfully read flights list"
+      post:
+        operationId: "database.create_flights"
+        tags:
+          - Flights
+        summary: "Create a flights"
+        requestBody:
+            description: "Flights to create"
+            required: True
+            content:
+              application/json:
+                schema:
+                  x-body-name: "flights"
+                  $ref: "#/components/schemas/Flights"
+        responses:
+          "201":
+            description: "Successfully created flights"
+      put:
+        tags:
+          - Flights
+        operationId: "database.update_flights"
+        summary: "Update a flights"
+        responses:
+          "200":
+            description: "Successfully updated flights"
+        requestBody:
+          description: "Flights to update"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "flights"
+                $ref: "#/components/schemas/Flights"
+
+  /flights/{num}:
+    get:
+       operationId: "database.read_one_flights"
+       tags:
+         - Flights
+       summary: "Read one flights"
+       parameters:
+         - $ref: "#/components/parameters/num"
+       responses:
+         "200":
+           description: "Successfully read flights"
+    delete:
+      tags:  
+        - Flights    
+      operationId: "database.delete_flights"
+      summary: "Delete a flights"
+      parameters:
+        - $ref: "#/components/parameters/num"
+      responses:
+        "204":
+          description: "Successfully deleted flights"
+
+  /hotel:
+      get:
+        operationId: "database.read_all_hotels"
+        tags:
+          - Hotels
+        summary: "Read the list of hotels"
+        responses:
+          "200":
+            description: "Successfully read hotels list"
+      post:
+        operationId: "database.create_hotel"
+        tags:
+          - Hotels
+        summary: "Create a hotel"
+        requestBody:
+            description: "Hotel to create"
+            required: True
+            content:
+              application/json:
+                schema:
+                  x-body-name: "hotel"
+                  $ref: "#/components/schemas/Hotel"
+        responses:
+          "201":
+            description: "Successfully created hotel"
+      put:
+        tags:
+          - Hotels
+        operationId: "database.update_hotel"
+        summary: "Update a hotel"
+        responses:
+          "200":
+            description: "Successfully updated hotel"
+        requestBody:
+          description: "Hotel to update"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "hotel"
+                $ref: "#/components/schemas/Hotel"
+
+  /hotel/{id}:
+    get:
+       operationId: "database.read_one_hotel"
+       tags:
+         - Hotels
+       summary: "Read one hotel"
+       parameters:
+         - $ref: "#/components/parameters/id"
+       responses:
+         "200":
+           description: "Successfully read hotel"
+    delete:
+      tags:  
+        - Hotels    
+      operationId: "database.delete_hotel"
+      summary: "Delete a hotel"
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "204":
+          description: "Successfully deleted hotel"
+
+  /route:
+      get:
+        operationId: "database.read_all_routes"
+        tags:
+          - Routes
+        summary: "Read the list of routes"
+        responses:
+          "200":
+            description: "Successfully read routes list"
+      post:
+        operationId: "database.create_route"
+        tags:
+          - Routes
+        summary: "Create a route"
+        requestBody:
+            description: "Route to create"
+            required: True
+            content:
+              application/json:
+                schema:
+                  x-body-name: "route"
+                  $ref: "#/components/schemas/Route"
+        responses:
+          "201":
+            description: "Successfully created route"
+      put:
+        tags:
+          - Routes
+        operationId: "database.update_route"
+        summary: "Update a route"
+        responses:
+          "200":
+            description: "Successfully updated route"
+        requestBody:
+          description: "Route to update"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "route"
+                $ref: "#/components/schemas/Route"
+
+  /route/{id}:
+    get:
+       operationId: "database.read_one_route"
+       tags:
+         - Routes
+       summary: "Read one route"
+       parameters:
+         - $ref: "#/components/parameters/id"
+       responses:
+         "200":
+           description: "Successfully read route"
+    delete:
+      tags:  
+        - Routes    
+      operationId: "database.delete_route"
+      summary: "Delete a route"
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "204":
+          description: "Successfully deleted route"
+
+  /ticket:
+      get:
+        operationId: "database.read_all_tickets"
+        tags:
+          - Tickets
+        summary: "Read the list of tickets"
+        responses:
+          "200":
+            description: "Successfully read tickets list"
+      post:
+        operationId: "database.create_ticket"
+        tags:
+          - Tickets
+        summary: "Create a ticket"
+        requestBody:
+            description: "Ticket to create"
+            required: True
+            content:
+              application/json:
+                schema:
+                  x-body-name: "ticket"
+                  $ref: "#/components/schemas/Ticket"
+        responses:
+          "201":
+            description: "Successfully created ticket"
+      put:
+        tags:
+          - Tickets
+        operationId: "database.update_ticket"
+        summary: "Update a ticket"
+        responses:
+          "200":
+            description: "Successfully updated ticket"
+        requestBody:
+          description: "Ticket to update"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "ticket"
+                $ref: "#/components/schemas/Ticket"
+
+  /ticket/{id}:
+    get:
+       operationId: "database.read_one_ticket"
+       tags:
+         - Tickets
+       summary: "Read one ticket"
+       parameters:
+         - $ref: "#/components/parameters/id"
+       responses:
+         "200":
+           description: "Successfully read ticket"
+    delete:
+      tags:  
+        - Tickets    
+      operationId: "database.delete_ticket"
+      summary: "Delete a ticket"
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "204":
+          description: "Successfully deleted ticket"
+
+  /transfer:
+        get:
+          operationId: "database.read_all_transfers"
+          tags:
+            - Transfers
+          summary: "Read the list of transfers"
+          responses:
+            "200":
+              description: "Successfully read transfers list"
+        post:
+          operationId: "database.create_transfer"
+          tags:
+            - Transfers
+          summary: "Create a transfer"
+          requestBody:
+              description: "Transfer to create"
+              required: True
+              content:
+                application/json:
+                  schema:
+                    x-body-name: "transfer"
+                    $ref: "#/components/schemas/Transfer"
+          responses:
+            "201":
+              description: "Successfully created transfer"
+        put:
+          tags:
+            - Transfers
+          operationId: "database.update_transfer"
+          summary: "Update a transfer"
+          responses:
+            "200":
+              description: "Successfully updated transfer"
+          requestBody:
+            description: "Transfer to update"
+            required: True
+            content:
+              application/json:
+                schema:
+                  x-body-name: "transfer"
+                  $ref: "#/components/schemas/Transfer"
+
+  /transfer/{id}:
+    get:
+       operationId: "database.read_one_transfer"
+       tags:
+         - Transfers
+       summary: "Read one transfer"
+       parameters:
+         - $ref: "#/components/parameters/id"
+       responses:
+         "200":
+           description: "Successfully read transfer"
+    delete:
+      tags:  
+        - Transfers    
+      operationId: "database.delete_transfer"
+      summary: "Delete a transfer"
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "204":
+          description: "Successfully deleted transfer"
+
+  /company:
+        get:
+          operationId: "database.read_all_companies"
+          tags:
+            - Companies
+          summary: "Read the list of companies"
+          responses:
+            "200":
+              description: "Successfully read companies list"
+        post:
+          operationId: "database.create_company"
+          tags:
+            - Companies
+          summary: "Create a company"
+          requestBody:
+              description: "Company to create"
+              required: True
+              content:
+                application/json:
+                  schema:
+                    x-body-name: "company"
+                    $ref: "#/components/schemas/Company"
+          responses:
+            "201":
+              description: "Successfully created company"
+        put:
+          tags:
+            - Companies
+          operationId: "database.update_company"
+          summary: "Update a company"
+          responses:
+            "200":
+              description: "Successfully updated company"
+          requestBody:
+            description: "Company to update"
+            required: True
+            content:
+              application/json:
+                schema:
+                  x-body-name: "company"
+                  $ref: "#/components/schemas/Company"
+
+  /company/{id}:
+    get:
+       operationId: "database.read_one_company"
+       tags:
+         - Companies
+       summary: "Read one company"
+       parameters:
+         - $ref: "#/components/parameters/id"
+       responses:
+         "200":
+           description: "Successfully read company"
+    delete:
+      tags:  
+        - Companies    
+      operationId: "database.delete_company"
+      summary: "Delete a company"
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        "204":
+          description: "Successfully deleted company"
